@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { LuSearch } from "react-icons/lu";
 import plan from "../../assets/details/Plan.png";
-import cove from "../../assets/details/Rectangle 5583 (1).png";
-import spring from "../../assets/details/Rectangle 5583 (2).png";
-import plam from "../../assets/details/Rectangle 5583 (3).png";
-import st from "../../assets/details/Rectangle 5583 (4).png";
-import tarpon from "../../assets/details/Rectangle 5583 (5).png";
-import ave from "../../assets/details/Rectangle 5583.png";
 import rightBanner from "../../assets/details/bannerSide.png";
 import arrowSing from "../../assets/details/sort.png";
+import { TProperties } from "../Property/Property";
 
 type TTableData = {
   _id: string;
@@ -23,11 +18,18 @@ type TTableData = {
 const App = () => {
   const [toggle, setToggle] = useState(false);
   const [tableData, setTableData] = useState<TTableData[]>([]);
+  const [properties, setProperties] = useState<TProperties[]>([]);
 
   useEffect(() => {
     fetch("/totalApplications.json")
       .then((res) => res.json())
       .then((data) => setTableData(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("/properties.json")
+      .then((res) => res.json())
+      .then((data) => setProperties(data));
   }, []);
 
   return (
@@ -66,154 +68,62 @@ const App = () => {
 
             {/* small house content */}
             {/* card 1 */}
-            <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="md:flex gap-4 md:items-center">
-                <div>
-                  <img src={ave} className="w-full" alt="" />
-                </div>
-                <div className="flex pt-4 md:pt-0">
+            {properties?.map((item) => (
+              <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
+                <div className="md:flex gap-4 md:items-center">
                   <div>
-                    <h4 className="text-[#000929] font-semibold text-xl">
-                      Faulkner Ave
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">
-                      909 Woodland St, Michig...
-                    </p>
+                    <img
+                      src={item.image}
+                      className="md:w-[105px] rounded-md"
+                      alt=""
+                    />
                   </div>
-                  <div>
-                    <h4 className="text-[#27AE60] border bg-[#E6F9EE] px-3 py-1 rounded-full text-sm font-semibold">
-                      OCCUPIED
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">128 sq m</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* card 2 */}
-            <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="md:flex gap-4 md:items-center">
-                <div>
-                  <img src={cove} className="w-full" alt="" />
-                </div>
-                <div className="flex pt-4 md:pt-0">
-                  <div>
-                    <h4 className="text-[#000929] font-semibold text-xl">
-                      Cove Red
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">
-                      243 Curlew Road, Palm H...
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold">
-                      REQUEST
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">128 sq m</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* card 3 */}
-            <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="md:flex gap-4 md:items-center">
-                <div>
-                  <img src={spring} className="w-full" alt="" />
-                </div>
-                <div className="flex pt-4 md:pt-0">
-                  <div>
-                    <h4 className="text-[#000929] font-semibold text-xl">
-                      Beverly Springs
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">
-                      2821 Lake Sevilla, Palm Ha...
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-[#6565F0] border bg-[#E9E9F9] px-3 py-1 rounded-full text-sm font-semibold">
-                      VACANT
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  <div className="flex justify-between w-full pt-4 md:pt-0">
+                    <div>
+                      <h4 className="text-[#000929] font-semibold text-xl">
+                        {item.title}
+                      </h4>
+                      <p className="text-[#7F8287] mt-2">
+                        {item.address.length > 31
+                          ? item.address?.slice(0, 31)
+                          : item.address}{" "}
+                        {item.address.length > 31 ? "..." : ""}
+                      </p>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                      <div>
+                        {item.status === "active" && (
+                          <p className="text-[#6565F0] border bg-[#E9E9F9] px-3 py-1 rounded-full text-sm font-semibold uppercase">
+                            {item.status}
+                          </p>
+                        )}
+                        {item.status === "occupied" && (
+                          <p className="text-[#27AE60] border bg-[#E6F9EE] px-3 py-1 rounded-full text-sm font-semibold uppercase">
+                            {item.status}
+                          </p>
+                        )}
+                        {item.status === "maintenance" && (
+                          <p className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold uppercase">
+                            {item.status}
+                          </p>
+                        )}
+                        {item.status === "request" && (
+                          <p className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold uppercase">
+                            {item.status}
+                          </p>
+                        )}
+                        {item.status === "vacant" && (
+                          <p className="text-[#6565F0] border bg-[#E9E9F9] px-3 py-1 rounded-full text-sm font-semibold uppercase">
+                            {item.status}
+                          </p>
+                        )}
+                      </div>
+                      <p className="text-[#7F8287] mt-2">{item.sqm} sq m</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* card 4 */}
-            <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="md:flex gap-4 md:items-center">
-                <div>
-                  <img src={plam} className="w-full" alt="" />
-                </div>
-                <div className="flex pt-4 md:pt-0">
-                  <div>
-                    <h4 className="text-[#000929] font-semibold text-xl">
-                      Palm Harbor
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">
-                      2699 Green Valley, Highla...
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold">
-                      REQUEST
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">128 sq m</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* card 5 */}
-            <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="md:flex gap-4 md:items-center">
-                <div>
-                  <img src={st} className="w-full" alt="" />
-                </div>
-                <div className="flex pt-4 md:pt-0">
-                  <div>
-                    <h4 className="text-[#000929] font-semibold text-xl">
-                      St. Crystal
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">
-                      210 US Highway, Highlan...
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold">
-                      MAINTENANCE
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">128 sq m</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* card 6 */}
-            <div className="w-full py-5 px-5 rounded-md border hover:shadow-lg duration-500 my-5 cursor-pointer bg-white">
-              <div className="md:flex gap-4 md:items-center">
-                <div>
-                  <img src={tarpon} className="w-full" alt="" />
-                </div>
-                <div className="flex pt-4 md:pt-0">
-                  <div>
-                    <h4 className="text-[#000929] font-semibold text-xl">
-                      Tarpon Bay
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">
-                      103 Lake Shores, Mich...
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold">
-                      MAINTENANCE
-                    </h4>
-                    <p className="text-[#7F8287] mt-2">128 sq m</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* right side content */}
@@ -283,10 +193,7 @@ const App = () => {
                       <>
                         <tr key={item._id} className="">
                           <td className="flex gap-2 items-center ">
-                            <img
-                              src="https://i.ibb.co/WBvbYRM/Group.png"
-                              alt=""
-                            />
+                            <img src={item.image} alt="" />
                             <p>{item.title}</p>
                           </td>
 
