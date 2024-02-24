@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { LuSearch } from "react-icons/lu";
 import groupImg from "../../assets/details/Group.png";
@@ -12,12 +13,14 @@ import rightBanner from "../../assets/details/bannerSide.png";
 import arrowSing from "../../assets/details/sort.png";
 
 const App = () => {
+  const [toggle, setToggle] = useState(false);
+
   return (
     <div className="bg-[#f7f7fd] py-10">
       <div className="max-w-[1240px] mx-auto">
         {/* title */}
-        <div className="grid grid-cols-12 gap-5">
-          <div className="col-span-5 flex justify-between">
+        <div className="md:grid md:grid-cols-12 gap-5 px-4 md:px-0">
+          <div className="md:col-span-5 flex justify-between">
             <h2 className="text-xl font-bold text-[#000929]">
               Properties{" "}
               <span className="px-2 py-1 rounded-md bg-[#000929] text-white font-semibold text-lg">
@@ -31,9 +34,9 @@ const App = () => {
         </div>
 
         {/* main content */}
-        <div className="grid lg:grid-cols-12 mt-14 gap-5">
+        <div className="grid md:grid-cols-12 mt-14 gap-5">
           {/* left-side content */}
-          <div className="col-span-5 mx-2 lg:mx-0">
+          <div className="md:col-span-5 mx-2 lg:mx-0">
             {/* search */}
             <div className="w-full py-3 border rounded flex items-center gap-5 ml-3 lg:ml-0">
               <LuSearch className="text-2xl ml-5" />
@@ -49,135 +52,164 @@ const App = () => {
             {/* small house content */}
             {/* card 1 */}
             <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="flex gap-4 lg:items-center">
-                <img src={ave} alt="" />
+              <div className="md:flex gap-4 md:items-center">
                 <div>
-                  <h4 className="text-[#000929] font-semibold text-xl">
-                    Faulkner Ave
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">
-                    909 Woodland St, Michig...
-                  </p>
+                  <img src={ave} className="w-full" alt="" />
                 </div>
-                <div>
-                  <h4 className="text-[#27AE60] border bg-[#E6F9EE] px-3 py-1 rounded-full text-sm font-semibold">
-                    OCCUPIED
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">128 sq m</p>
+                <div className="flex pt-4 md:pt-0">
+                  <div>
+                    <h4 className="text-[#000929] font-semibold text-xl">
+                      Faulkner Ave
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">
+                      909 Woodland St, Michig...
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#27AE60] border bg-[#E6F9EE] px-3 py-1 rounded-full text-sm font-semibold">
+                      OCCUPIED
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  </div>
                 </div>
               </div>
             </div>
+
             {/* card 2 */}
             <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="flex gap-4 lg:items-center">
-                <img src={cove} alt="" />
+              <div className="md:flex gap-4 md:items-center">
                 <div>
-                  <h4 className="text-[#000929] font-semibold text-xl">
-                    Cove Red
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">
-                    243 Curlew Road, Palm H...
-                  </p>
+                  <img src={cove} className="w-full" alt="" />
                 </div>
-                <div>
-                  <h4 className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold">
-                    REQUEST
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">128 sq m</p>
+                <div className="flex pt-4 md:pt-0">
+                  <div>
+                    <h4 className="text-[#000929] font-semibold text-xl">
+                      Cove Red
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">
+                      243 Curlew Road, Palm H...
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold">
+                      REQUEST
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  </div>
                 </div>
               </div>
             </div>
+
             {/* card 3 */}
             <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="flex gap-4 lg:items-center">
-                <img src={spring} alt="" />
+              <div className="md:flex gap-4 md:items-center">
                 <div>
-                  <h4 className="text-[#000929] font-semibold text-xl">
-                    Beverly Springs
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">
-                    2821 Lake Sevilla, Palm Ha...
-                  </p>
+                  <img src={spring} className="w-full" alt="" />
                 </div>
-                <div>
-                  <h4 className="text-[#6565F0] border bg-[#E9E9F9] px-3 py-1 rounded-full text-sm font-semibold">
-                    VACANT
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">128 sq m</p>
+                <div className="flex pt-4 md:pt-0">
+                  <div>
+                    <h4 className="text-[#000929] font-semibold text-xl">
+                      Beverly Springs
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">
+                      2821 Lake Sevilla, Palm Ha...
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#6565F0] border bg-[#E9E9F9] px-3 py-1 rounded-full text-sm font-semibold">
+                      VACANT
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  </div>
                 </div>
               </div>
             </div>
+
             {/* card 4 */}
             <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="flex gap-4 lg:items-center">
-                <img src={plam} alt="" />
+              <div className="md:flex gap-4 md:items-center">
                 <div>
-                  <h4 className="text-[#000929] font-semibold text-xl">
-                    Palm Harbor
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">
-                    2699 Green Valley, Highla...
-                  </p>
+                  <img src={plam} className="w-full" alt="" />
                 </div>
-                <div>
-                  <h4 className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold">
-                    REQUEST
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">128 sq m</p>
+                <div className="flex pt-4 md:pt-0">
+                  <div>
+                    <h4 className="text-[#000929] font-semibold text-xl">
+                      Palm Harbor
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">
+                      2699 Green Valley, Highla...
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#FFB154] border bg-[#FFF1E0] px-3 py-1 rounded-full text-sm font-semibold">
+                      REQUEST
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  </div>
                 </div>
               </div>
             </div>
+
             {/* card 5 */}
             <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
-              <div className="flex gap-4 lg:items-center">
-                <img src={st} alt="" />
+              <div className="md:flex gap-4 md:items-center">
                 <div>
-                  <h4 className="text-[#000929] font-semibold text-xl">
-                    St. Crystal
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">
-                    210 US Highway, Highlan...
-                  </p>
+                  <img src={st} className="w-full" alt="" />
                 </div>
-                <div>
-                  <h4 className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold">
-                    MAINTENANCE
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">128 sq m</p>
+                <div className="flex pt-4 md:pt-0">
+                  <div>
+                    <h4 className="text-[#000929] font-semibold text-xl">
+                      St. Crystal
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">
+                      210 US Highway, Highlan...
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold">
+                      MAINTENANCE
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  </div>
                 </div>
               </div>
             </div>
+
             {/* card 6 */}
             <div className="w-full py-5 px-5 rounded-md border hover:shadow-lg duration-500 my-5 cursor-pointer bg-white">
-              <div className="flex gap-4 lg:items-center">
-                <img src={tarpon} alt="" />
+              <div className="md:flex gap-4 md:items-center">
                 <div>
-                  <h4 className="text-[#000929] font-semibold text-xl">
-                    Tarpon Bay
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">
-                    103 Lake Shores, Mich...
-                  </p>
+                  <img src={tarpon} className="w-full" alt="" />
                 </div>
-                <div>
-                  <h4 className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold">
-                    MAINTENANCE
-                  </h4>
-                  <p className="text-[#7F8287] mt-2">128 sq m</p>
+                <div className="flex pt-4 md:pt-0">
+                  <div>
+                    <h4 className="text-[#000929] font-semibold text-xl">
+                      Tarpon Bay
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">
+                      103 Lake Shores, Mich...
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#FF6161] border bg-[#F9E9E9] px-3 py-1 rounded-full text-sm font-semibold">
+                      MAINTENANCE
+                    </h4>
+                    <p className="text-[#7F8287] mt-2">128 sq m</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* right side content */}
-          <div className="col-span-7">
+          <div className="md:col-span-7">
             {/* right-side-img */}
-            <div className="">
+            <div className="px-2 md:px-0">
               <img src={rightBanner} className="w-full" alt="" />
             </div>
 
             {/* details */}
-            <div className="grid lg:grid-cols-6 gap-5 px-5 border rounded-md items-center w-full py-2 text-center lg:text-start bg-white">
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-5 px-5 border rounded-md items-center w-full py-2 text-center lg:text-start bg-white">
               <div>
                 <h2 className="text-[#8B8C93] text-xl">Properties</h2>
                 <p className="mt-2">46</p>
@@ -231,7 +263,7 @@ const App = () => {
                       <th className="text-start">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="text-[#000929] text-[12px] md:text-[16px] font-medium">
+                  <tbody className="text-[#000929] text-[12px] md:text-[16px] font-medium ">
                     <tr className="">
                       <td className="flex gap-2 items-center ">
                         <img src={groupImg} alt="" />
@@ -244,7 +276,9 @@ const App = () => {
                         Paid
                       </td>
                       <td>
-                        <BsThreeDots />
+                        <span onClick={() => setToggle(!toggle)}>
+                          <BsThreeDots />
+                        </span>
                       </td>
                     </tr>
                     <tr>
@@ -258,7 +292,9 @@ const App = () => {
                         Paid
                       </td>
                       <td className="">
-                        <BsThreeDots />
+                        <span onClick={() => setToggle(!toggle)}>
+                          <BsThreeDots />
+                        </span>
                       </td>
                     </tr>
                     <tr>
@@ -272,7 +308,9 @@ const App = () => {
                         Unpaid
                       </td>
                       <td>
-                        <BsThreeDots />
+                        <span onClick={() => setToggle(!toggle)}>
+                          <BsThreeDots />
+                        </span>
                       </td>
                     </tr>
                     <tr>
@@ -286,26 +324,31 @@ const App = () => {
                         Unpaid
                       </td>
                       <td>
-                        <BsThreeDots />
+                        <span onClick={() => setToggle(!toggle)}>
+                          <BsThreeDots />
+                        </span>
                       </td>
                     </tr>
                   </tbody>
                 </table>
 
-                <div className="bg-white absolute top-[50%] right-14 px-3 py-2 rounded-sm shadow-lg">
-                  <div className="flex justify-center items-center gap-2">
-                    <div className="h-2 w-2 bg-[#27AE60] rounded-full"></div>
-                    <p className="text-[12px] font-medium text-[#000929]">
-                      Paid
-                    </p>
+                {/* toggle */}
+                {toggle && (
+                  <div className="bg-white absolute top-[50%] right-14 px-3 py-2 rounded-sm shadow-lg">
+                    <div className="flex justify-center items-center gap-2">
+                      <div className="h-2 w-2 bg-[#27AE60] rounded-full"></div>
+                      <p className="text-[12px] font-medium text-[#000929]">
+                        Paid
+                      </p>
+                    </div>
+                    <div className="flex justify-center items-center gap-2">
+                      <div className="h-2 w-2 bg-[#FF6161] rounded-full"></div>
+                      <p className="text-[12px] font-medium text-[#000929]">
+                        Unpaid
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex justify-center items-center gap-2">
-                    <div className="h-2 w-2 bg-[#FF6161] rounded-full"></div>
-                    <p className="text-[12px] font-medium text-[#000929]">
-                      Unpaid
-                    </p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
