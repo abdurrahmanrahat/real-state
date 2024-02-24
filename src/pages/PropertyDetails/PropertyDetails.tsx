@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { LuSearch } from "react-icons/lu";
 import plan from "../../assets/details/Plan.png";
-import rightBanner from "../../assets/details/bannerSide.png";
 import arrowSing from "../../assets/details/sort.png";
+import LineIcon from "../../assets/icons/Line.png";
+import MinimizeIcon from "../../assets/icons/maximize.png";
+import ShareIcon from "../../assets/icons/share.png";
 import { TProperties } from "../Property/Property";
 
 type TTableData = {
@@ -66,8 +68,7 @@ const App = () => {
               />
             </div>
 
-            {/* small house content */}
-            {/* card 1 */}
+            {/* cards list */}
             {properties?.map((item) => (
               <div className="w-full py-5 px-2 rounded-md border hover:shadow-lg duration-500 mt-5 cursor-pointer bg-white">
                 <div className="md:flex gap-4 md:items-center">
@@ -129,8 +130,41 @@ const App = () => {
           {/* right side content */}
           <div className="md:col-span-7">
             {/* right-side-img */}
-            <div className="px-2 md:px-0">
-              <img src={rightBanner} className="w-full" alt="" />
+            <div>
+              <h2 className="text-[32px] font-bold text-[#000929]">
+                Property Details
+              </h2>
+              <div className="px-2 md:px-0 py-4 relative">
+                <img
+                  src="https://i.ibb.co/tJw4Y0m/sp.png"
+                  className="w-full"
+                  alt=""
+                />
+                <div className="text-white absolute bottom-8 left-8">
+                  <h4 className="text-[24px] font-bold">Cove Red</h4>
+                  <p>2821 Lake Sevilla, Palm Harbor, TX</p>
+                </div>
+                {/* icon in top of image */}
+                <div className="flex gap-2 absolute top-8 right-8">
+                  <div className="border border-white p-1 rounded-md">
+                    <img src={ShareIcon} alt="" />
+                  </div>
+                  <div className="border border-white p-1 rounded-md">
+                    <img src={MinimizeIcon} alt="" />
+                  </div>
+                </div>
+
+                {/* line and page */}
+                <div className=" absolute bottom-8 right-8">
+                  <p className="text-white text-end">1 of 4</p>
+                  <div className="flex gap-1">
+                    <img src={LineIcon} alt="" />
+                    <img src={LineIcon} alt="" />
+                    <img src={LineIcon} alt="" />
+                    <img src={LineIcon} alt="" />
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* details */}
