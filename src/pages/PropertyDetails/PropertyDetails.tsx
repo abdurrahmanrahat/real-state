@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { LuSearch } from "react-icons/lu";
-import groupImg from "../../assets/details/Group.png";
 import plan from "../../assets/details/Plan.png";
 import cove from "../../assets/details/Rectangle 5583 (1).png";
 import spring from "../../assets/details/Rectangle 5583 (2).png";
@@ -12,8 +11,24 @@ import ave from "../../assets/details/Rectangle 5583.png";
 import rightBanner from "../../assets/details/bannerSide.png";
 import arrowSing from "../../assets/details/sort.png";
 
+type TTableData = {
+  _id: string;
+  image: string;
+  title: string;
+  price: string;
+  number: string;
+  status: "paid" | "unpaid";
+};
+
 const App = () => {
   const [toggle, setToggle] = useState(false);
+  const [tableData, setTableData] = useState<TTableData[]>([]);
+
+  useEffect(() => {
+    fetch("/totalApplications.json")
+      .then((res) => res.json())
+      .then((data) => setTableData(data));
+  }, []);
 
   return (
     <div className="bg-[#f7f7fd] py-10">
@@ -264,71 +279,38 @@ const App = () => {
                     </tr>
                   </thead>
                   <tbody className="text-[#000929] text-[12px] md:text-[16px] font-medium ">
-                    <tr className="">
-                      <td className="flex gap-2 items-center ">
-                        <img src={groupImg} alt="" />
-                        <p>Wade Warren</p>
-                      </td>
+                    {tableData?.map((item) => (
+                      <>
+                        <tr key={item._id} className="">
+                          <td className="flex gap-2 items-center ">
+                            <img
+                              src="https://i.ibb.co/WBvbYRM/Group.png"
+                              alt=""
+                            />
+                            <p>{item.title}</p>
+                          </td>
 
-                      <td className="">$396</td>
-                      <td className="">(217) 555-0113</td>
-                      <td className="text-[#27AE60] bg-[#E6F9EE]  rounded-full text-xs font-semibold text-center ">
-                        Paid
-                      </td>
-                      <td>
-                        <span onClick={() => setToggle(!toggle)}>
-                          <BsThreeDots />
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="flex gap-2 items-center">
-                        <img src={groupImg} alt="" />
-                        <p>Wade Warren</p>
-                      </td>
-                      <td>$778</td>
-                      <td>(704) 555-0127</td>
-                      <td className="text-[#27AE60] bg-[#E6F9EE]  rounded-full text-xs font-semibold text-center">
-                        Paid
-                      </td>
-                      <td className="">
-                        <span onClick={() => setToggle(!toggle)}>
-                          <BsThreeDots />
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="flex gap-2 items-center">
-                        <img src={groupImg} alt="" />
-                        <p>Wade Warren</p>
-                      </td>
-                      <td>$396</td>
-                      <td>(225) 555-0118</td>
-                      <td className="text-[#FF6161]  bg-[#F9E9E9] text-center rounded-full text-sm font-semibold">
-                        Unpaid
-                      </td>
-                      <td>
-                        <span onClick={() => setToggle(!toggle)}>
-                          <BsThreeDots />
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="flex gap-2 items-center">
-                        <img src={groupImg} alt="" />
-                        <p>Wade Warren</p>
-                      </td>
-                      <td>$396</td>
-                      <td>(217) 555-0113</td>
-                      <td className="text-[#FF6161]  bg-[#F9E9E9] text-center rounded-full text-sm font-semibold">
-                        Unpaid
-                      </td>
-                      <td>
-                        <span onClick={() => setToggle(!toggle)}>
-                          <BsThreeDots />
-                        </span>
-                      </td>
-                    </tr>
+                          <td className="">${item.price}</td>
+                          <td className="">{item.number}</td>
+                          <td>
+                            {item.status === "paid" ? (
+                              <button className="text-[#27AE60] bg-[#E6F9EE]  rounded-full text-xs font-semibold text-center ">
+                                Paid
+                              </button>
+                            ) : (
+                              <button className="text-[#FF6161]  bg-[#F9E9E9] text-center rounded-full text-sm font-semibold">
+                                Unpaid
+                              </button>
+                            )}
+                          </td>
+                          <td>
+                            <span onClick={() => setToggle(!toggle)}>
+                              <BsThreeDots />
+                            </span>
+                          </td>
+                        </tr>
+                      </>
+                    ))}
                   </tbody>
                 </table>
 
