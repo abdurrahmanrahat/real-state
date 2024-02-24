@@ -10,8 +10,8 @@ import PropertyCard from "./PropertyCard";
 
 const Property = () => {
   return (
-    <div className="bg-[#f7f7fd] ">
-      {/* one */}
+    <div className="bg-[#f7f7fd] py-10">
+      {/* filtering and add post */}
       <div className="md:flex justify-between">
         <div className="p-3 bg-white rounded-[4px] text-center">
           <select className="p-2 focus:outline-none text-[#000929] font-bold">
